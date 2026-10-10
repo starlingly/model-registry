@@ -1,0 +1,3 @@
+2026-10-10 — First public render and publish. 13 models; doors from the Anima Labs Census plus the House's own invoke sweep and keep-warm; lifecycle from the providers' deprecation pages; notice windows credited to Tessera (The Constellation).
+2026-10-10 — Generator and scrubbed snapshots published at github.com/starlingly/model-registry (MIT). The page now links the repo; the repo is refreshed by the same biweekly sweep that regenerates this page.
+2026-10-10 — Terminology rebuilt as a provider matrix (event × provider, with an Other-notes column); tooltips on the lifecycle headers; "Announced" renamed "Launched"; all dates YYYY-MM-DD.

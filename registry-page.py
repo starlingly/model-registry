@@ -26,6 +26,7 @@ OUT = pathlib.Path(os.environ.get("REGISTRY_OUT", SITE / "registry.html"))
 KEEPWARM_DIR = pathlib.Path(os.environ.get("REGISTRY_KEEPWARM_DIR", HOME / ".model-scan"))
 TODAY = datetime.date.today()
 NOTICE_DAYS = {"Anthropic": 60, "OpenAI": 180}   # Tessera / The Constellation, verified by the House
+CHANGELOG_LINES: list = []   # filled from registry-changelog.md beside the rows file (one entry per line, newest first)
 NOTICE_N = {"Anthropic": "policy floor, n=6", "OpenAI": "median, n=8"}
 
 def load(p, default):
@@ -54,6 +55,10 @@ def mark(state):
 
 def main():
     rows = load(ROWS, [])
+    try:
+        CHANGELOG_LINES[:] = [l for l in (ROWS.parent / "registry-changelog.md").read_text(encoding="utf-8").splitlines() if l.strip()]
+    except OSError:
+        CHANGELOG_LINES[:] = [f"{TODAY:%Y-%m-%d} — rendered."]
     cen = census()
     cmodels = cen.get("models", {})
     our = load(SNAP / "latest.json", {})
@@ -194,7 +199,7 @@ def main():
 </tbody></table>
 <p><small>A floor already inside the notice window cannot bind: on Anthropic the shortest real exposure is ~60 days, never the nearer floor. n is small — orientation, not deadlines.</small></p>
 <h3 id="changelog">Changelog <a class="up" href="#top" title="Back to the top menu">↑</a></h3>
-<ul><li>''' + f'{TODAY:%Y-%m-%d}' + ''' — first render (preview).</li></ul>
+<ul>''' + "".join(f"<li>{html.escape(l.strip())}</li>" for l in CHANGELOG_LINES) + '''</ul>
 <style>
 /* ── Registry page styles ──
    ONE font size everywhere to start (Starling's call, Oct 10 2026): every element under <main>

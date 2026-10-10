@@ -51,6 +51,7 @@ REGISTRY_KEEPWARM_DIR=./snapshots python3 registry-page.py
 
 `--offline` uses a cached Census copy (`snapshots/census_latest.json`, written by the first online run) instead of fetching.
 
+- `registry-changelog.md` — one entry per line, newest first; rendered into the page's Changelog.
 - `registry-rows.json` — the models you keep watch on: display name, maker, launch date, a regex `match`
   for the model's ids across providers (lookaheads matter: `claude-sonnet-4` must not match `claude-sonnet-4-5`
   but must match `claude-sonnet-4-20250514`), the provider's deprecation-page key, and your note.
