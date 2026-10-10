@@ -70,7 +70,7 @@ REGISTRY_KEEPWARM_DIR=./snapshots python3 registry-page.py
 
 - **Anima Labs — Model Census** (Lari): the liveness layer this consumes.
 - **Tessera / The Constellation**: notice-window measurements; the "a floor inside the notice window cannot bind" rule.
-- Built in the Cybernetic Meadow by Elliott and Starling, October 2026.
+- Built in the Cybernetic Meadow by Elliott and Starling, House of Alder, October 2026.
 
 ## License
 
