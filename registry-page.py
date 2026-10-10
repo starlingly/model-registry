@@ -233,7 +233,7 @@ main.container h2, main.container h3 { scroll-margin-top: 1.2rem; }
 .registry th { position: sticky; top: 0; }
 main.container th { background: var(--bg-soft); vertical-align: top; }
 .registry td.door { text-align: center; }
-.registry col.c-model { width: 8%; } .registry col.c-maker { width: 5.5%; } .registry col.c-date { width: 6%; }
+.registry col.c-model { width: 8%; } .registry col.c-maker { width: 6.5%; } .registry col.c-date { width: 6%; }
 .registry col.c-door { width: 4.2%; } .registry col.c-legacy { width: 11%; } .registry col.c-life { width: 7%; }
 .registry col.c-note { width: auto; }
 @media (min-width: 900px) { main div[style*="overflow-x"] { overflow-x: visible !important; } }
