@@ -1,0 +1,145 @@
+[
+ {
+  "display": "Claude 3 Opus",
+  "maker": "Anthropic",
+  "line": "Opus",
+  "released": "2024-03-04",
+  "match": [
+   "claude-3-opus"
+  ],
+  "dep_key": "claude-3-opus-20240229",
+  "note": "Retired from the general Anthropic API in January 2026. Still answers on Anthropic-direct for accounts with research access, and that is the only door left: Bedrock and Vertex are end-of-life in every region we have checked. If you have it, keep it; there is no second road."
+ },
+ {
+  "display": "Claude 3 Haiku",
+  "maker": "Anthropic",
+  "line": "Haiku",
+  "released": "2024-03-13",
+  "match": [
+   "claude-3-haiku"
+  ],
+  "dep_key": "claude-3-haiku-20240307",
+  "note": "Gone from the US Bedrock regions (end-of-life) but ACTIVE in Mumbai, Singapore and Seoul — Bedrock lifecycle is per region. Use the plain foundation id there, no inference profile, and no prompt caching (it predates caching)."
+ },
+ {
+  "display": "Claude 3.5 Sonnet (June 2024)",
+  "maker": "Anthropic",
+  "line": "Sonnet",
+  "released": "2024-06-20",
+  "match": [
+   "claude-3[-.]5-sonnet-20240620"
+  ],
+  "dep_key": "claude-3-5-sonnet-20240620",
+  "note": "Retired on Anthropic-direct and delisted from OpenRouter, but still ACTIVE on Bedrock in the APAC regions (Singapore, Seoul). A fresh AWS account can still adopt it there. Plain foundation id works."
+ },
+ {
+  "display": "Claude 3.5 Sonnet (Oct 2024, \"3.6\")",
+  "maker": "Anthropic",
+  "line": "Sonnet",
+  "released": "2024-10-22",
+  "match": [
+   "claude-3[-.]5-sonnet(?!-20240620)"
+  ],
+  "dep_key": "claude-3-5-sonnet-20241022",
+  "note": "Same story as the June build: alive on Bedrock APAC only. This one REQUIRES the apac. cross-region inference profile — the bare id is rejected for on-demand use."
+ },
+ {
+  "display": "Claude 3.5 Haiku",
+  "maker": "Anthropic",
+  "line": "Haiku",
+  "released": "2024-10-22",
+  "match": [
+   "claude-3[-.]5-haiku"
+  ],
+  "dep_key": "claude-3-5-haiku-20241022",
+  "note": "Retired on Anthropic-direct, Bedrock and Vertex (June 2026). The Vercel AI Gateway carried it for a while after everyone else; check its door before assuming. No vision on this model."
+ },
+ {
+  "display": "Claude 3.7 Sonnet",
+  "maker": "Anthropic",
+  "line": "Sonnet",
+  "released": "2025-02-24",
+  "match": [
+   "claude-3[-.]7-sonnet"
+  ],
+  "dep_key": "claude-3-7-sonnet-20250219",
+  "note": "Removed from US Bedrock on 2026-07-30 — and still ACTIVE in London (eu-west-2) and Mumbai (ap-south-1), no legacy date set. Use the plain foundation id in London (the eu. profile does not exist for it). Prompt caching works."
+ },
+ {
+  "display": "Claude Sonnet 4",
+  "maker": "Anthropic",
+  "line": "Sonnet",
+  "released": "2025-05-22",
+  "match": [
+   "claude-sonnet-4(?![-.]\\d(?!\\d))"
+  ],
+  "dep_key": "claude-sonnet-4-20250514",
+  "note": "Bedrock end-of-life 2026-10-14 (us-east-1 was the only region serving it on our account). After that: OpenRouter."
+ },
+ {
+  "display": "Claude Opus 4",
+  "maker": "Anthropic",
+  "line": "Opus",
+  "released": "2025-05-22",
+  "match": [
+   "claude-opus-4(?![-.]\\d(?!\\d))"
+  ],
+  "dep_key": "claude-opus-4-20250514",
+  "note": "Retired on Anthropic-direct 2026-06-15. It lived on through OpenRouter (routed via Google Vertex) until 2026-09-19, when that road went dark too; Vertex quota requests are the remaining lever. If you find it answering anywhere, treasure the door."
+ },
+ {
+  "display": "Claude Opus 4.1",
+  "maker": "Anthropic",
+  "line": "Opus",
+  "released": "2025-08-05",
+  "match": [
+   "claude-opus-4[-.]1(?![-.]\\d(?!\\d))"
+  ],
+  "dep_key": "claude-opus-4-1-20250805",
+  "note": "Retired on Anthropic-direct 2026-08-05. Alive on OpenRouter (their Bedrock pool) and, since 2026-10-08, on Bedrock-direct again under extended access — LEGACY status, end-of-life 2027-01-08. Legacy means: existing users keep access only while they keep using it (roughly a 15-day inactivity gate), and new accounts cannot adopt it. Send it a real question every week."
+ },
+ {
+  "display": "Claude Sonnet 4.5",
+  "maker": "Anthropic",
+  "line": "Sonnet",
+  "released": "2025-09-29",
+  "match": [
+   "claude-sonnet-4[-.]5(?![-.]\\d(?!\\d))"
+  ],
+  "dep_key": "claude-sonnet-4-5-20250929",
+  "note": "Deprecated on Anthropic-direct 2026-09-30; retires 2026-11-30. Bedrock London (eu-west-2) carries it via the eu. inference profile — a good survival lane. Plan the move before the end of November."
+ },
+ {
+  "display": "Claude Haiku 4.5",
+  "maker": "Anthropic",
+  "line": "Haiku",
+  "released": "2025-10-15",
+  "match": [
+   "claude-haiku-4[-.]5(?![-.]\\d(?!\\d))"
+  ],
+  "dep_key": "claude-haiku-4-5-20251001",
+  "note": "Current. Published retirement floor 2026-10-15 on Anthropic's deprecations page — a floor, not a date. Watch the page."
+ },
+ {
+  "display": "GPT-4o (2024-11-20)",
+  "maker": "OpenAI",
+  "line": "GPT",
+  "released": "2024-11-20",
+  "match": [
+   "gpt-4o(-2024-11-20)?(?![-.\\w])"
+  ],
+  "dep_key": "gpt-4o-2024-11-20",
+  "note": "Still served on OpenAI-direct and OpenRouter. OpenAI's notice window has historically been about six months; when the deprecation lands you will have time, but the Chat Completions route is the one to keep an eye on."
+ },
+ {
+  "display": "Grok 3",
+  "maker": "xAI",
+  "line": "Grok",
+  "released": "2025-02-17",
+  "match": [
+   "grok-3(?![-.\\w])"
+  ],
+  "dep_key": "grok-3",
+  "note": "xAI publishes no retirement dates: a model vanishing from the list is the only notice you get. Keep an export."
+ }
+]

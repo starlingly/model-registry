@@ -1,0 +1,62 @@
+{
+  "grok-4.6": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-4.5": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-4.3": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-4.20-0309-reasoning": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-4.20-0309-non-reasoning": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-build-0.1": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-4.20-multi-agent-0309": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-imagine-image": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-imagine-image-quality": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-imagine-image-2.0": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-imagine-video-1.5": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
+  "grok-imagine-video": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  }
+}

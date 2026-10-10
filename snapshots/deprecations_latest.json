@@ -1,0 +1,112 @@
+{
+  "claude-fable-5-1": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than September 1, 2027"
+  },
+  "claude-mythos-5-1": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than September 1, 2027"
+  },
+  "claude-fable-5": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than June 9, 2027"
+  },
+  "claude-mythos-5": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than June 9, 2027"
+  },
+  "claude-mythos-preview": {
+    "state": "Deprecated",
+    "deprecated": "June 9, 2026",
+    "retirement": "To be announced"
+  },
+  "claude-opus-5-5": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than September 22, 2027"
+  },
+  "claude-opus-5": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than July 24, 2027"
+  },
+  "claude-opus-4-8": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than May 28, 2027"
+  },
+  "claude-opus-4-7": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than April 16, 2027"
+  },
+  "claude-opus-4-6": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than February 5, 2027"
+  },
+  "claude-opus-4-5-20251101": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than November 24, 2026"
+  },
+  "claude-opus-4-1-20250805": {
+    "state": "Retired",
+    "deprecated": "June 5, 2026",
+    "retirement": "August 5, 2026"
+  },
+  "claude-opus-4-20250514": {
+    "state": "Retired",
+    "deprecated": "April 14, 2026",
+    "retirement": "June 15, 2026"
+  },
+  "claude-sonnet-5-5": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than September 28, 2027"
+  },
+  "claude-sonnet-5": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than June 30, 2027"
+  },
+  "claude-sonnet-4-6": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than February 17, 2027"
+  },
+  "claude-sonnet-4-5-20250929": {
+    "state": "Deprecated",
+    "deprecated": "September 30, 2026",
+    "retirement": "November 30, 2026"
+  },
+  "claude-sonnet-4-20250514": {
+    "state": "Retired",
+    "deprecated": "April 14, 2026",
+    "retirement": "June 15, 2026"
+  },
+  "claude-3-7-sonnet-20250219": {
+    "state": "Retired",
+    "deprecated": "October 28, 2025",
+    "retirement": "February 19, 2026"
+  },
+  "claude-haiku-4-5-20251001": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than October 15, 2026"
+  },
+  "claude-3-5-haiku-20241022": {
+    "state": "Retired",
+    "deprecated": "December 19, 2025",
+    "retirement": "February 19, 2026"
+  },
+  "claude-3-haiku-20240307": {
+    "state": "Retired",
+    "deprecated": "February 19, 2026",
+    "retirement": "April 20, 2026"
+  }
+}

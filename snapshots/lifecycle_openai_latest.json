@@ -1,0 +1,127 @@
+{
+  "gpt-5.4-cyber": {
+    "state": "Deprecated",
+    "retirement": "Oct 1, 2026",
+    "replacement": "The most capable cyber model available to you."
+  },
+  "whisper-1": {
+    "state": "Deprecated",
+    "retirement": "Feb 26, 2027",
+    "replacement": "gpt-live-transcribe` or `gpt-transcribe"
+  },
+  "gpt-4o-transcribe": {
+    "state": "Deprecated",
+    "retirement": "Feb 26, 2027",
+    "replacement": "gpt-live-transcribe` or `gpt-transcribe"
+  },
+  "gpt-4o-mini-transcribe": {
+    "state": "Deprecated",
+    "retirement": "Feb 26, 2027",
+    "replacement": "gpt-live-transcribe` or `gpt-transcribe"
+  },
+  "gpt-4o-transcribe-diarize": {
+    "state": "Deprecated",
+    "retirement": "Feb 26, 2027",
+    "replacement": "gpt-live-transcribe` or `gpt-transcribe"
+  },
+  "gpt-realtime": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-realtime-2.1"
+  },
+  "gpt-audio": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-audio-1.5"
+  },
+  "gpt-4o-audio": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-audio-1.5"
+  },
+  "gpt-4o-realtime": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-realtime-2.1"
+  },
+  "gpt-realtime-mini": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-realtime-2.1-mini"
+  },
+  "gpt-audio-mini": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-audio-1.5"
+  },
+  "gpt-4o-mini-realtime": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-realtime-2.1-mini"
+  },
+  "gpt-4o-mini-audio": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-audio-1.5"
+  },
+  "gpt-4o-mini-transcribe-2025-03-20": {
+    "state": "Deprecated",
+    "retirement": "Jan 20, 2027",
+    "replacement": "gpt-4o-mini-transcribe-2025-12-15"
+  },
+  "gpt-5-2025-08-07": {
+    "state": "Deprecated",
+    "retirement": "Dec 11, 2026",
+    "replacement": "gpt-5.6-sol"
+  },
+  "gpt-5-mini-2025-08-07": {
+    "state": "Deprecated",
+    "retirement": "Dec 11, 2026",
+    "replacement": "gpt-5.6-terra"
+  },
+  "gpt-5-nano-2025-08-07": {
+    "state": "Deprecated",
+    "retirement": "Dec 11, 2026",
+    "replacement": "gpt-5.6-luna"
+  },
+  "gpt-5-pro-2025-10-06": {
+    "state": "Deprecated",
+    "retirement": "Dec 11, 2026",
+    "replacement": "gpt-5.6-sol` (`reasoning.mode: pro`)"
+  },
+  "o3-2025-04-16": {
+    "state": "Deprecated",
+    "retirement": "Dec 11, 2026",
+    "replacement": "gpt-5.6-sol"
+  },
+  "o3-pro-2025-06-10": {
+    "state": "Deprecated",
+    "retirement": "Dec 11, 2026",
+    "replacement": "gpt-5.6-sol` (`reasoning.mode: pro`)"
+  },
+  "gpt-image-1-mini": {
+    "state": "Deprecated",
+    "retirement": "Dec 1, 2026",
+    "replacement": "gpt-image-2.5-sunburst` or `gpt-image-2.5-flare"
+  },
+  "gpt-image-1.5": {
+    "state": "Deprecated",
+    "retirement": "Dec 1, 2026",
+    "replacement": "gpt-image-2.5-sunburst` or `gpt-image-2.5-flare"
+  },
+  "chatgpt-image-latest": {
+    "state": "Deprecated",
+    "retirement": "Dec 1, 2026",
+    "replacement": "gpt-image-2.5-sunburst` or `gpt-image-2.5-flare"
+  },
+  "gpt-5.2-chat-latest": {
+    "state": "Deprecated",
+    "retirement": "Aug 10, 2026",
+    "replacement": "gpt-5.6-sol"
+  },
+  "gpt-5.3-chat-latest": {
+    "state": "Deprecated",
+    "retirement": "Aug 10, 2026",
+    "replacement": "gpt-5.6-sol"
+  }
+}
