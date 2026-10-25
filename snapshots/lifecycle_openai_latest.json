@@ -1,8 +1,38 @@
 {
-  "gpt-5.4-cyber": {
+  "gpt-5.3-codex": {
     "state": "Deprecated",
-    "retirement": "Oct 1, 2026",
-    "replacement": "The most capable cyber model available to you."
+    "retirement": "Apr 1, 2027",
+    "replacement": "gpt-6-sol"
+  },
+  "gpt-5.4-nano": {
+    "state": "Deprecated",
+    "retirement": "Apr 1, 2027",
+    "replacement": "gpt-6-luna"
+  },
+  "gpt-5.1": {
+    "state": "Deprecated",
+    "retirement": "Apr 1, 2027",
+    "replacement": "gpt-6-sol"
+  },
+  "tts-1": {
+    "state": "Deprecated",
+    "retirement": "Jan 6, 2027",
+    "replacement": "gpt-realtime-2.1-mini"
+  },
+  "tts-1-hd": {
+    "state": "Deprecated",
+    "retirement": "Jan 6, 2027",
+    "replacement": "gpt-realtime-2.1-mini"
+  },
+  "gpt-4o-mini-tts-2025-03-20": {
+    "state": "Deprecated",
+    "retirement": "Jan 6, 2027",
+    "replacement": "gpt-realtime-2.1-mini"
+  },
+  "gpt-4o-mini-tts-2025-12-15": {
+    "state": "Deprecated",
+    "retirement": "Jan 6, 2027",
+    "replacement": "gpt-realtime-2.1-mini"
   },
   "whisper-1": {
     "state": "Deprecated",
@@ -23,6 +53,11 @@
     "state": "Deprecated",
     "retirement": "Feb 26, 2027",
     "replacement": "gpt-live-transcribe` or `gpt-transcribe"
+  },
+  "/v1/audio/translations": {
+    "state": "Deprecated",
+    "retirement": "Feb 26, 2027",
+    "replacement": "v1/realtime/translations"
   },
   "gpt-realtime": {
     "state": "Deprecated",
@@ -113,6 +148,11 @@
     "state": "Deprecated",
     "retirement": "Dec 1, 2026",
     "replacement": "gpt-image-2.5-sunburst` or `gpt-image-2.5-flare"
+  },
+  "gpt-5.4-cyber": {
+    "state": "Deprecated",
+    "retirement": "Oct 1, 2026",
+    "replacement": "The most capable cyber model available to you."
   },
   "gpt-5.2-chat-latest": {
     "state": "Deprecated",

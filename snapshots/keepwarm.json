@@ -35,11 +35,6 @@
   "model_id": "us.anthropic.claude-opus-4-1-20250805-v1:0"
  },
  {
-  "label": "us.anthropic.claude-sonnet-4-20250514-v1:0",
-  "region": "us-east-1",
-  "model_id": "us.anthropic.claude-sonnet-4-20250514-v1:0"
- },
- {
   "label": "anthropic.claude-3-sonnet-20240229-v1:0",
   "region": "eu-west-2",
   "model_id": "anthropic.claude-3-sonnet-20240229-v1:0"

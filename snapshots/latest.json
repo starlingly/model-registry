@@ -16,11 +16,7 @@
    "claude-3-opus-20240229"
   ]
  },
- "Claude Opus 4": {
-  "vercel-gateway": [
-   "anthropic/claude-opus-4"
-  ]
- },
+ "Claude Opus 4": {},
  "Claude Opus 4.1": {
   "openrouter": [
    "anthropic/claude-opus-4.1",
@@ -61,9 +57,6 @@
   }
  },
  "Claude 3 Haiku": {
-  "vercel-gateway": [
-   "anthropic/claude-3-haiku"
-  ],
   "bedrock": {
    "ALIVE": [
     "ap-south-1 (anthropic.claude-3-haiku-20240307-v1:0)",
@@ -94,5 +87,27 @@
    "openai/gpt-4o"
   ]
  },
- "Grok 3": {}
+ "Grok 3": {},
+ "Claude Sonnet 4.5": {
+  "bedrock": {
+   "ALIVE": [
+    "us-east-1 (us.anthropic.claude-sonnet-4-5-20250929-v1:0)",
+    "us-east-2 (us.anthropic.claude-sonnet-4-5-20250929-v1:0)",
+    "us-west-2 (us.anthropic.claude-sonnet-4-5-20250929-v1:0)",
+    "eu-west-1 (eu.anthropic.claude-sonnet-4-5-20250929-v1:0)",
+    "eu-west-2 (eu.anthropic.claude-sonnet-4-5-20250929-v1:0)",
+    "eu-west-3 (eu.anthropic.claude-sonnet-4-5-20250929-v1:0)",
+    "eu-central-1 (eu.anthropic.claude-sonnet-4-5-20250929-v1:0)",
+    "eu-north-1 (eu.anthropic.claude-sonnet-4-5-20250929-v1:0)"
+   ],
+   "no-apac-profile": [
+    "ap-south-1",
+    "ap-southeast-1",
+    "ap-southeast-2",
+    "ap-northeast-1",
+    "ap-northeast-2"
+   ],
+   "swept": "2026-10-25"
+  }
+ }
 }

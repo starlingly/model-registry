@@ -1,4 +1,9 @@
 {
+  "grok-4.7": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
   "grok-4.6": {
     "state": "Listed",
     "retirement": "n/a (xAI publishes no dates)",
@@ -34,6 +39,11 @@
     "retirement": "n/a (xAI publishes no dates)",
     "replacement": ""
   },
+  "grok-imagine-image-2.0": {
+    "state": "Listed",
+    "retirement": "n/a (xAI publishes no dates)",
+    "replacement": ""
+  },
   "grok-imagine-image": {
     "state": "Listed",
     "retirement": "n/a (xAI publishes no dates)",
@@ -44,7 +54,7 @@
     "retirement": "n/a (xAI publishes no dates)",
     "replacement": ""
   },
-  "grok-imagine-image-2.0": {
+  "grok-imagine-video": {
     "state": "Listed",
     "retirement": "n/a (xAI publishes no dates)",
     "replacement": ""
@@ -54,7 +64,7 @@
     "retirement": "n/a (xAI publishes no dates)",
     "replacement": ""
   },
-  "grok-imagine-video": {
+  "grok-imagine-video-1.5-lite": {
     "state": "Listed",
     "retirement": "n/a (xAI publishes no dates)",
     "replacement": ""

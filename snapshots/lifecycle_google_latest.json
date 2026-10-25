@@ -25,9 +25,9 @@
     "replacement": ""
   },
   "gemini-3.7-flash": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
-    "replacement": ""
+    "state": "Deprecated",
+    "retirement": "N/A",
+    "replacement": "gemini-3.8-flash (not available to select in Google AI Studio; the endpoint is not shutting down and automatically routes API requests to gemini-3.8-flash)"
   },
   "gemini-3.6-flash": {
     "state": "Active",
@@ -40,19 +40,9 @@
     "replacement": ""
   },
   "gemini-3.5-flash": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
-    "replacement": ""
-  },
-  "gemini-3.1-flash-image": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
-    "replacement": ""
-  },
-  "gemini-3-pro-image": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
-    "replacement": ""
+    "state": "Deprecated",
+    "retirement": "N/A",
+    "replacement": "gemini-3.6-flash (not available to select in Google AI Studio; the endpoint is not shutting down and automatically routes API requests to gemini-3.6-flash)"
   },
   "gemini-3.1-flash-lite": {
     "state": "Deprecated",
@@ -60,24 +50,14 @@
     "replacement": "gemini-3.5-flash-lite"
   },
   "gemini-3.1-flash-tts-preview": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
-    "replacement": "gemini-3.8-flash-tts or gemini-3.8-flash-lite-tts"
-  },
-  "gemini-3.1-flash-image-preview": {
     "state": "Deprecated",
-    "retirement": "June 25, 2026",
-    "replacement": "gemini-3.1-flash-image"
+    "retirement": "November 17, 2026",
+    "replacement": "gemini-3.8-flash-tts or gemini-3.8-flash-lite-tts"
   },
   "gemini-3.1-pro-preview": {
     "state": "Active",
     "retirement": "No shutdown date announced",
     "replacement": ""
-  },
-  "gemini-3-pro-image-preview": {
-    "state": "Deprecated",
-    "retirement": "June 25, 2026",
-    "replacement": "gemini-3-pro-image"
   },
   "gemini-3-flash-preview": {
     "state": "Active",
@@ -93,11 +73,6 @@
     "state": "Active",
     "retirement": "No shutdown date announced",
     "replacement": ""
-  },
-  "gemini-2.5-flash-image": {
-    "state": "Deprecated",
-    "retirement": "October 2, 2026",
-    "replacement": "gemini-3.1-flash-image-preview"
   },
   "gemini-2.5-flash-lite": {
     "state": "Active",
@@ -115,13 +90,13 @@
     "replacement": ""
   },
   "gemini-3.1-flash-live-preview": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
+    "state": "Deprecated",
+    "retirement": "November 17, 2026",
     "replacement": "gemini-3.8-live"
   },
   "gemini-2.5-flash-native-audio-preview-12-2025": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
+    "state": "Deprecated",
+    "retirement": "November 17, 2026",
     "replacement": "gemini-3.8-live"
   },
   "gemini-3.5-transcribe": {
@@ -130,8 +105,13 @@
     "replacement": ""
   },
   "gemini-2.5-flash-preview-tts": {
-    "state": "Active",
-    "retirement": "No shutdown date announced",
+    "state": "Deprecated",
+    "retirement": "November 17, 2026",
+    "replacement": "gemini-3.8-flash-tts or gemini-3.8-flash-lite-tts"
+  },
+  "gemini-2.5-pro-preview-tts": {
+    "state": "Deprecated",
+    "retirement": "November 17, 2026",
     "replacement": "gemini-3.8-flash-tts or gemini-3.8-flash-lite-tts"
   },
   "gemini-embedding-2": {
@@ -144,10 +124,40 @@
     "retirement": "May 14, 2028",
     "replacement": "gemini-embedding-2"
   },
+  "gemini-nano-banana-2.1": {
+    "state": "Active",
+    "retirement": "No shutdown date announced",
+    "replacement": ""
+  },
+  "gemini-3.1-flash-lite-image": {
+    "state": "Active",
+    "retirement": "No shutdown date announced",
+    "replacement": ""
+  },
+  "gemini-3.1-flash-image": {
+    "state": "Active",
+    "retirement": "No shutdown date announced",
+    "replacement": "gemini-nano-banana-2.1"
+  },
+  "gemini-3-pro-image": {
+    "state": "Active",
+    "retirement": "No shutdown date announced",
+    "replacement": ""
+  },
+  "gemini-2.5-flash-image": {
+    "state": "Deprecated",
+    "retirement": "March 15, 2027",
+    "replacement": "gemini-3.1-flash-lite-image"
+  },
   "gemini-omni-1.1-flash": {
     "state": "Active",
     "retirement": "No shutdown date announced",
     "replacement": ""
+  },
+  "gemini-omni-flash-preview": {
+    "state": "Deprecated",
+    "retirement": "October 22, 2026",
+    "replacement": "gemini-omni-1.1-flash"
   },
   "gemini-robotics-er-1.6-preview": {
     "state": "Deprecated",

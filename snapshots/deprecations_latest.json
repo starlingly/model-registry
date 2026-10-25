@@ -94,6 +94,11 @@
     "deprecated": "October 28, 2025",
     "retirement": "February 19, 2026"
   },
+  "claude-haiku-5-5": {
+    "state": "Active",
+    "deprecated": "N/A",
+    "retirement": "Not sooner than October 7, 2027"
+  },
   "claude-haiku-4-5-20251001": {
     "state": "Active",
     "deprecated": "N/A",
