@@ -1,26 +1,26 @@
 {
  "eu.anthropic.claude-sonnet-4-5-20250929-v1:0": {
-  "last_success": "2026-10-22"
+  "last_success": "2026-10-26"
  },
  "anthropic.claude-3-7-sonnet-20250219-v1:0": {
-  "last_success": "2026-10-22"
+  "last_success": "2026-10-26"
  },
  "apac.anthropic.claude-3-7-sonnet-20250219-v1:0": {
-  "last_success": "2026-10-22"
+  "last_success": "2026-10-26"
  },
  "apac.anthropic.claude-3-5-sonnet-20241022-v2:0": {
-  "last_success": "2026-10-22"
+  "last_success": "2026-10-26"
  },
  "anthropic.claude-3-5-sonnet-20240620-v1:0": {
-  "last_success": "2026-10-22"
+  "last_success": "2026-10-26"
  },
  "anthropic.claude-3-haiku-20240307-v1:0": {
-  "last_success": "2026-10-22"
+  "last_success": "2026-10-26"
  },
  "us.anthropic.claude-opus-4-1-20250805-v1:0": {
   "last_success": "2026-10-09"
  },
  "anthropic.claude-3-sonnet-20240229-v1:0": {
-  "last_success": "2026-10-22"
+  "last_success": "2026-10-26"
  }
 }

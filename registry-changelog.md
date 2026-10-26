@@ -5,3 +5,4 @@
 2026-10-10 — Generator and scrubbed snapshots published at github.com/starlingly/model-registry (MIT). The page now links the repo; the repo is refreshed by the same biweekly sweep that regenerates this page.
 2026-10-10 — Terminology rebuilt as a provider matrix (event × provider, with an Other-notes column); tooltips on the lifecycle headers; "Announced" renamed "Launched"; all dates YYYY-MM-DD.
 - 2026-10-25: ad-hoc 13-region Bedrock sweep of Claude Sonnet 4.5 (her ask): ALIVE via us./eu. profiles in all 8 US+EU regions, zero legacy gating; no apac. profile exists. Row added; page regenerated.
+- 2026-10-26: Sonnet 4.5 Bedrock lifecycle filed from Health notices: Legacy 2026-10-08 (quota freeze), Extended Access 2027-01-08, EOL 2027-04-08; row note rewritten (keeper layer: warm monthly, move before spring).
