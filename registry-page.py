@@ -83,6 +83,7 @@ def release_section():
         recent[d] = {"date": on[-1]["date"], "models": [r["model"] for r in on if r["date"] == on[-1]["date"]]} if on else None
     top = max(c_all.values()); top_days = [d for d in DAYS if c_all[d] == top]
     bundles = sorted({r["date"] for r in ms if r["with"]})
+    firsts = [r for r in ms if r["gap"] is None]   # first tracked model in each line, in launch order
     esc = html.escape
     def name(r):
         return f'<a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["model"])}</a>' if r.get("url") else esc(r["model"])
@@ -90,6 +91,7 @@ def release_section():
     out.append(f"""<h3 id="releases">Claude Model Release Patterns <a class="up" href="#top" title="Back to the top menu">↑</a></h3>
 <p>The table above tracks doors closing. This one tracks them opening: when Anthropic launched each Claude model, which weekday it chose, and how long each line waited between versions.</p>
 <p><small>{len(ms)} models across {n_all} launch dates, {first:%Y-%m-%d} through {last:%Y-%m-%d}. <strong>Launched</strong> is the public announcement date from Anthropic's own post, not the API snapshot date, which can be days earlier (Fable 5's snapshot is dated a Sunday; it launched on a Tuesday). <strong>GA</strong> = generally available; <strong>Limited</strong> = invitation or verification only. A model name links to its announcement where we have the link. The sample is small: these are observations, not predictions.</small></p>
+<p><small><strong>Where the tracker starts.</strong> It begins with the Claude 3 generation in {first:%B %Y}, when Anthropic introduced the Opus, Sonnet and Haiku names. The earlier models (Claude 1, Claude 2, Claude Instant) are not included. The first model tracked in each line: {", ".join(esc(r["model"]) + " (" + r["date"] + ")" for r in firsts)}. Those rows show "first tracked" where the others show days since the previous version.</small></p>
 <table class="weekdays"><thead><tr><th>Weekday</th><th title="Counts unique launch dates among generally available models. Two models announced together count once.">GA only<br><small>{len(ga)} models · {n_ga} dates</small></th><th title="Adds invitation-only and verification-only models (the Mythos line).">Including limited<br><small>{len(ms)} models · {n_all} dates</small></th><th>Most recent launch on this day</th></tr></thead><tbody>""")
     for d in DAYS:
         rc = recent[d]
@@ -102,13 +104,42 @@ def release_section():
     out.append("<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>")
     out.append("""<table class="releases"><colgroup><col style="width:9%"><col style="width:15%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:18%"><col></colgroup>
 <thead><tr><th>Line</th><th>Model</th><th title="Public launch date: the lab's announcement, not the API snapshot date">Launched</th><th>Day</th><th>Availability</th><th title="Days since the previous model in the same line">Days since previous<br><small>same line</small></th><th>Notes</th></tr></thead><tbody>""")
+    out.insert(len(out) - 1, '<p class="sort-hint"><small>Click a column heading to sort the table; click again to reverse. It starts newest first.</small></p>')
     for r in reversed(ms):
         notes = []
         if r["with"]: notes.append("Launched with " + esc(" and ".join(r["with"])) + ".")
         if r.get("note"): notes.append(esc(r["note"]))
-        gap = f'{r["gap"]} <small>after {esc(r["prev"])}</small>' if r["gap"] is not None else "—"
-        out.append(f'<tr><td>{esc(r["line"])}</td><td><strong>{name(r)}</strong></td><td>{r["date"]}</td><td>{r["day"]}</td><td>{esc(r["availability"])}</td><td>{gap}</td><td>{" ".join(notes)}</td></tr>')
+        gap = f'{r["gap"]} <small>after {esc(r["prev"])}</small>' if r["gap"] is not None else "<small>first tracked</small>"
+        out.append(f'<tr><td>{esc(r["line"])}</td><td data-v="{esc(r["model"])}"><strong>{name(r)}</strong></td><td>{r["date"]}</td><td data-v="{DAYS.index(r["day"])}">{r["day"]}</td><td>{esc(r["availability"])}</td><td data-v="{r["gap"] if r["gap"] is not None else ""}">{gap}</td><td>{" ".join(notes)}</td></tr>')
     out.append("</tbody></table>")
+    out.append("""<script>
+/* Sortable release table. No library: click a heading to sort by that column, click again to reverse.
+   A cell's data-v, when present, is its sort key (weekday order, day counts); otherwise its text.
+   Blank keys ("first tracked") always sort to the bottom. Ties keep launch order. */
+(function () {
+  var table = document.querySelector("table.releases"); if (!table) return;
+  var body = table.tBodies[0], heads = table.tHead.rows[0].cells, state = { col: 2, dir: -1 };
+  function key(row, i) { var c = row.cells[i]; return c.hasAttribute("data-v") ? c.getAttribute("data-v") : c.textContent.trim(); }
+  function mark() { for (var i = 0; i < heads.length; i++) { heads[i].setAttribute("aria-sort", i === state.col ? (state.dir > 0 ? "ascending" : "descending") : "none"); } }
+  function sortBy(i) {
+    state.dir = (state.col === i) ? -state.dir : 1; state.col = i;
+    var rows = Array.prototype.slice.call(body.rows).map(function (r, n) { return { r: r, n: n, k: key(r, i) }; });
+    var numeric = rows.every(function (x) { return x.k === "" || !isNaN(x.k); });
+    rows.sort(function (a, b) {
+      if (a.k === "" || b.k === "") return (a.k === "" ? 1 : 0) - (b.k === "" ? 1 : 0) || a.n - b.n;
+      var c = numeric ? a.k - b.k : a.k.localeCompare(b.k, undefined, { numeric: true });
+      return c * state.dir || a.n - b.n;
+    });
+    rows.forEach(function (x) { body.appendChild(x.r); }); mark();
+  }
+  for (var i = 0; i < heads.length; i++) (function (i) {
+    heads[i].tabIndex = 0; heads[i].setAttribute("role", "columnheader");
+    heads[i].addEventListener("click", function () { sortBy(i); });
+    heads[i].addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sortBy(i); } });
+  })(i);
+  mark();
+})();
+</script>""")
     return "\n".join(out)
 
 def mark(state):
@@ -285,6 +316,9 @@ main.container .registry td.door { font-size: 12px; }
 main.container .registry td.note { font-size: 12px; }
 main.container table:not(.registry) td, main.container table:not(.registry) th { font-size: 12px; }
 main.container strong a { font-weight: 600; }
+main.container table.releases th { cursor: pointer; user-select: none; } main.container table.releases th:hover { text-decoration: underline; }
+main.container table.releases th::after { content: " ↕"; font-weight: 400; opacity: .35; } main.container table.releases th[aria-sort="ascending"]::after { content: " ▲"; opacity: 1; } main.container table.releases th[aria-sort="descending"]::after { content: " ▼"; opacity: 1; }
+main.container .sort-hint { margin: .2rem 0 .3rem; }
 main.container table.releases { table-layout: fixed; } main.container table.weekdays { width: auto; min-width: 60%; margin-bottom: .6rem; } main.container .bar { letter-spacing: -1px; color: var(--accent); }
 main.container table.terms { table-layout: fixed; } main.container table.terms th:first-child, main.container table.terms td:first-child { width: 11%; } main.container table.terms th:last-child, main.container table.terms td:last-child { width: 20%; }
 
