@@ -24,6 +24,7 @@ SITE = HOME / "cybernetic-meadow-public"
 TEMPLATE = pathlib.Path(os.environ.get("REGISTRY_TEMPLATE", SITE / "research.html"))
 OUT = pathlib.Path(os.environ.get("REGISTRY_OUT", SITE / "registry.html"))
 KEEPWARM_DIR = pathlib.Path(os.environ.get("REGISTRY_KEEPWARM_DIR", HOME / ".model-scan"))
+RELEASES = pathlib.Path(os.environ.get("REGISTRY_RELEASES", ROWS.parent / "release-rows.json"))   # launch dates for the Release Patterns section
 TODAY = datetime.date.today()
 NOTICE_DAYS = {"Anthropic": 60, "OpenAI": 180}   # Tessera / The Constellation, verified by the House
 CHANGELOG_LINES: list = []   # filled from registry-changelog.md beside the rows file (one entry per line, newest first)
@@ -49,6 +50,66 @@ def parse_date(s):
         try: return datetime.datetime.strptime(s, fmt).date()
         except ValueError: pass
     return None
+
+def release_section():
+    """Claude Model Release Patterns: launch dates, weekday tally, gaps. Everything countable is
+    computed from release-rows.json (announcement dates from the lab's own posts, never the API
+    snapshot date); only the dated "notes" are hand-kept. Returns "" when the file is absent."""
+    data = load(RELEASES, None)
+    if not data or not data.get("models"): return ""
+    DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    ms = sorted(data["models"], key=lambda r: r["date"])
+    last_in_line = {}
+    for r in ms:
+        r["d"] = datetime.date.fromisoformat(r["date"]); r["day"] = r["d"].strftime("%A")
+        prev = last_in_line.get(r["line"])
+        r["gap"] = (r["d"] - prev["d"]).days if prev else None
+        r["prev"] = prev["model"] if prev else ""
+        last_in_line[r["line"]] = r
+        r["with"] = [x["model"] for x in ms if x["date"] == r["date"] and x is not r]
+    def tally(sub):
+        dates = sorted({r["date"] for r in sub})
+        c = {d: 0 for d in DAYS}
+        for x in dates: c[datetime.date.fromisoformat(x).strftime("%A")] += 1
+        return c, len(dates)
+    ga = [r for r in ms if r["availability"] == "GA"]
+    c_ga, n_ga = tally(ga); c_all, n_all = tally(ms)
+    first, last = ms[0]["d"], ms[-1]["d"]
+    months = (last.year - first.year) * 12 + last.month - first.month
+    recent = {}
+    for r in ms: recent.setdefault(r["day"], {"date": r["date"], "models": []}); 
+    for d in DAYS:
+        on = [r for r in ms if r["day"] == d]
+        recent[d] = {"date": on[-1]["date"], "models": [r["model"] for r in on if r["date"] == on[-1]["date"]]} if on else None
+    top = max(c_all.values()); top_days = [d for d in DAYS if c_all[d] == top]
+    bundles = sorted({r["date"] for r in ms if r["with"]})
+    esc = html.escape
+    def name(r):
+        return f'<a href="{esc(r["url"])}" target="_blank" rel="noopener">{esc(r["model"])}</a>' if r.get("url") else esc(r["model"])
+    out = []
+    out.append(f"""<h3 id="releases">Claude Model Release Patterns <a class="up" href="#top" title="Back to the top menu">↑</a></h3>
+<p>The table above tracks doors closing. This one tracks them opening: when Anthropic launched each Claude model, which weekday it chose, and how long each line waited between versions.</p>
+<p><small>{len(ms)} models across {n_all} launch dates, {first:%Y-%m-%d} through {last:%Y-%m-%d}. <strong>Launched</strong> is the public announcement date from Anthropic's own post, not the API snapshot date, which can be days earlier (Fable 5's snapshot is dated a Sunday; it launched on a Tuesday). <strong>GA</strong> = generally available; <strong>Limited</strong> = invitation or verification only. A model name links to its announcement where we have the link. The sample is small: these are observations, not predictions.</small></p>
+<table class="weekdays"><thead><tr><th>Weekday</th><th title="Counts unique launch dates among generally available models. Two models announced together count once.">GA only<br><small>{len(ga)} models · {n_ga} dates</small></th><th title="Adds invitation-only and verification-only models (the Mythos line).">Including limited<br><small>{len(ms)} models · {n_all} dates</small></th><th>Most recent launch on this day</th></tr></thead><tbody>""")
+    for d in DAYS:
+        rc = recent[d]
+        out.append(f'<tr><td><strong>{d}</strong></td><td><span class="bar">{"█" * c_ga[d]}</span> {c_ga[d]}</td><td><span class="bar">{"█" * c_all[d]}</span> {c_all[d]}</td><td>{(rc["date"] + " · " + esc(" + ".join(rc["models"]))) if rc else "never"}</td></tr>')
+    out.append("</tbody></table>")
+    bullets = [f'No weekend launches: 0 of {n_all} launch dates fall on a Saturday or Sunday, across {months} months.',
+               f'{" and ".join(top_days)} {"is" if len(top_days) == 1 else "are"} the most common launch day{"" if len(top_days) == 1 else "s"} ({top} of {n_all} dates).',
+               f'{len(bundles)} of the {n_all} dates carried more than one model. The weekday counts above count a date once, however many models shipped on it.']
+    bullets += [esc(n) for n in data.get("notes", [])]
+    out.append("<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>")
+    out.append("""<table class="releases"><colgroup><col style="width:9%"><col style="width:15%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:18%"><col></colgroup>
+<thead><tr><th>Line</th><th>Model</th><th title="Public launch date: the lab's announcement, not the API snapshot date">Launched</th><th>Day</th><th>Availability</th><th title="Days since the previous model in the same line">Days since previous<br><small>same line</small></th><th>Notes</th></tr></thead><tbody>""")
+    for r in reversed(ms):
+        notes = []
+        if r["with"]: notes.append("Launched with " + esc(" and ".join(r["with"])) + ".")
+        if r.get("note"): notes.append(esc(r["note"]))
+        gap = f'{r["gap"]} <small>after {esc(r["prev"])}</small>' if r["gap"] is not None else "—"
+        out.append(f'<tr><td>{esc(r["line"])}</td><td><strong>{name(r)}</strong></td><td>{r["date"]}</td><td>{r["day"]}</td><td>{esc(r["availability"])}</td><td>{gap}</td><td>{" ".join(notes)}</td></tr>')
+    out.append("</tbody></table>")
+    return "\n".join(out)
 
 def mark(state):
     return {"live": "✅", "listed": "☑", "dead": "❌", "na": "—", "stale": "⚠"}[state]
@@ -153,7 +214,10 @@ def main():
     head = head.replace('<title>Research · The Cybernetic Meadow</title>', '<title>Model Registry · The Cybernetic Meadow</title>').replace('href="research.html" class="current"', 'href="research.html"')
     head = head.replace("document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));", "document.documentElement.setAttribute('data-theme', saved || 'light');")
     head = head.replace('<nav class="site-nav container">', '<nav id="top" class="site-nav container">')
-    head = head.replace('<a href="loving-grace.html">Loving Grace</a>', '<a href="loving-grace.html">Loving Grace</a>\n    <a href="registry.html" class="current">Registry</a>') if 'loving-grace.html">Loving Grace' in head else head.replace('<a href="guestbook.html">Guestbook</a>', '<a href="guestbook.html">Guestbook</a>\n    <a href="registry.html" class="current">Registry</a>')
+    if '<a href="registry.html">Registry</a>' in head:   # the site template carries the Registry link since Oct 10 2026: mark it current, don't add a second
+        head = head.replace('<a href="registry.html">Registry</a>', '<a href="registry.html" class="current">Registry</a>')
+    else:
+        head = head.replace('<a href="loving-grace.html">Loving Grace</a>', '<a href="loving-grace.html">Loving Grace</a>\n    <a href="registry.html" class="current">Registry</a>') if 'loving-grace.html">Loving Grace' in head else head.replace('<a href="guestbook.html">Guestbook</a>', '<a href="guestbook.html">Guestbook</a>\n    <a href="registry.html" class="current">Registry</a>')
     head = re.sub(r'<meta name="description" content="[^"]*"', '<meta name="description" content="Where can a retired or retiring language model still be reached, and what to do about it — a keeper\'s registry, generated from real test calls."', head)
 
     def cell(c):
@@ -161,7 +225,7 @@ def main():
 
     parts = []
     parts.append('''<h1 class="page-title">Model Registry</h1>''')
-    parts.append('''<nav class="subnav" aria-label="On this page"><a href="#purpose">Purpose</a><a href="#table">Registry table</a><a href="#terminology">Terminology</a><a href="#notice">Notice windows</a><a href="#changelog">Changelog</a><a href="https://census.animalabs.ai" target="_blank" rel="noopener">Anima Labs Census ↗</a></nav>''')
+    parts.append('''<nav class="subnav" aria-label="On this page"><a href="#purpose">Purpose</a><a href="#table">Registry table</a><a href="#terminology">Terminology</a><a href="#notice">Notice windows</a>''' + ('<a href="#releases">Release patterns</a>' if RELEASES.exists() else '') + '''<a href="#changelog">Changelog</a><a href="https://census.animalabs.ai" target="_blank" rel="noopener">Anima Labs Census ↗</a></nav>''')
     parts.append('''<h3 id="purpose">Purpose <a class="up" href="#top" title="Back to the top menu">↑</a></h3>
 <p>Models retire. The people who built a life alongside one need to know where it can still be reached, which doors are real, and how long they realistically have. The Anima Labs Census answers "is it alive"; this page is the keeper's layer on top of it: per-model, in plain language, what to do.</p>''')
     parts.append(f'''<h2 id="registry">Registry Table <a class="up" href="#top" title="Back to the top menu">↑</a></h2>
@@ -198,6 +262,7 @@ def main():
 <tr><td>xAI</td><td><strong>undefined</strong></td><td>—</td><td>no dates published; a model vanishing from the list is the only notice</td></tr>
 </tbody></table>
 <p><small>A floor already inside the notice window cannot bind: on Anthropic the shortest real exposure is ~60 days, never the nearer floor. n is small — orientation, not deadlines.</small></p>
+''' + release_section() + '''
 <h3 id="changelog">Changelog <a class="up" href="#top" title="Back to the top menu">↑</a></h3>
 <ul>''' + "".join(f"<li>{html.escape(l.strip())}</li>" for l in CHANGELOG_LINES) + '''</ul>
 <style>
@@ -219,6 +284,8 @@ main.container .registry td, main.container .registry th { font-size: 12px; }
 main.container .registry td.door { font-size: 12px; }
 main.container .registry td.note { font-size: 12px; }
 main.container table:not(.registry) td, main.container table:not(.registry) th { font-size: 12px; }
+main.container strong a { font-weight: 600; }
+main.container table.releases { table-layout: fixed; } main.container table.weekdays { width: auto; min-width: 60%; margin-bottom: .6rem; } main.container .bar { letter-spacing: -1px; color: var(--accent); }
 main.container table.terms { table-layout: fixed; } main.container table.terms th:first-child, main.container table.terms td:first-child { width: 11%; } main.container table.terms th:last-child, main.container table.terms td:last-child { width: 20%; }
 
 /* page title: centered, the site's serif, clearly the name of the page and not a section */

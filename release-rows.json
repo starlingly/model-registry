@@ -1,0 +1,41 @@
+{
+ "maker": "Anthropic",
+ "as_of": "2026-11-09",
+ "notes": [
+  "Monday went unused for 308 days (2025-11-24 to 2026-09-28), then was used twice in six weeks.",
+  "Opus 5 (2026-07-24) is the only Friday launch.",
+  "Fable and Mythos have launched together every time: 5, 5.1 and 5.2, one announcement each.",
+  "The 5.5 family arrived as three separate launches across 15 days (Opus, Sonnet, Haiku). The Claude 3 and Claude 4 generations each opened with Opus and Sonnet on the same day."
+ ],
+ "models": [
+  {"line": "Opus", "model": "Opus 3", "date": "2024-03-04", "availability": "GA"},
+  {"line": "Opus", "model": "Opus 4", "date": "2025-05-22", "availability": "GA"},
+  {"line": "Opus", "model": "Opus 4.1", "date": "2025-08-05", "availability": "GA"},
+  {"line": "Opus", "model": "Opus 4.5", "date": "2025-11-24", "availability": "GA"},
+  {"line": "Opus", "model": "Opus 4.6", "date": "2026-02-05", "availability": "GA", "url": "https://www.anthropic.com/news/claude-opus-4-6"},
+  {"line": "Opus", "model": "Opus 4.7", "date": "2026-04-16", "availability": "GA", "url": "https://www.anthropic.com/news/claude-opus-4-7"},
+  {"line": "Opus", "model": "Opus 4.8", "date": "2026-05-28", "availability": "GA", "url": "https://www.anthropic.com/news/claude-opus-4-8"},
+  {"line": "Opus", "model": "Opus 5", "date": "2026-07-24", "availability": "GA", "url": "https://www.anthropic.com/news/claude-opus-5"},
+  {"line": "Opus", "model": "Opus 5.5", "date": "2026-09-22", "availability": "GA", "url": "https://www.anthropic.com/claude-opus-5-5"},
+  {"line": "Sonnet", "model": "Sonnet 3", "date": "2024-03-04", "availability": "GA"},
+  {"line": "Sonnet", "model": "Sonnet 3.5", "date": "2024-06-20", "availability": "GA"},
+  {"line": "Sonnet", "model": "Sonnet 3.5 (new)", "date": "2024-10-22", "availability": "GA"},
+  {"line": "Sonnet", "model": "Sonnet 3.7", "date": "2025-02-24", "availability": "GA"},
+  {"line": "Sonnet", "model": "Sonnet 4", "date": "2025-05-22", "availability": "GA"},
+  {"line": "Sonnet", "model": "Sonnet 4.5", "date": "2025-09-29", "availability": "GA"},
+  {"line": "Sonnet", "model": "Sonnet 4.6", "date": "2026-02-17", "availability": "GA"},
+  {"line": "Sonnet", "model": "Sonnet 5", "date": "2026-06-30", "availability": "GA", "url": "https://www.anthropic.com/news/claude-sonnet-5"},
+  {"line": "Sonnet", "model": "Sonnet 5.5", "date": "2026-09-28", "availability": "GA", "url": "https://www.anthropic.com/claude-sonnet-5-5"},
+  {"line": "Haiku", "model": "Haiku 3", "date": "2024-03-13", "availability": "GA"},
+  {"line": "Haiku", "model": "Haiku 3.5", "date": "2024-10-22", "availability": "GA"},
+  {"line": "Haiku", "model": "Haiku 4.5", "date": "2025-10-15", "availability": "GA"},
+  {"line": "Haiku", "model": "Haiku 5.5", "date": "2026-10-07", "availability": "GA", "url": "https://www.anthropic.com/claude-haiku-5-5"},
+  {"line": "Fable", "model": "Fable 5", "date": "2026-06-09", "availability": "GA", "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"},
+  {"line": "Fable", "model": "Fable 5.1", "date": "2026-09-01", "availability": "GA", "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"},
+  {"line": "Fable", "model": "Fable 5.2", "date": "2026-11-09", "availability": "GA", "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2"},
+  {"line": "Mythos", "model": "Mythos Preview", "date": "2026-04-07", "availability": "Limited", "url": "https://www.anthropic.com/glasswing", "note": "Date of the public reveal. Partners had access earlier; Anthropic has not published when."},
+  {"line": "Mythos", "model": "Mythos 5", "date": "2026-06-09", "availability": "Limited", "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"},
+  {"line": "Mythos", "model": "Mythos 5.1", "date": "2026-09-01", "availability": "Limited", "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"},
+  {"line": "Mythos", "model": "Mythos 5.2", "date": "2026-11-09", "availability": "Limited", "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2"}
+ ]
+}

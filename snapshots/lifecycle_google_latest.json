@@ -154,14 +154,14 @@
     "retirement": "No shutdown date announced",
     "replacement": ""
   },
-  "gemini-omni-flash-preview": {
-    "state": "Deprecated",
-    "retirement": "October 22, 2026",
-    "replacement": "gemini-omni-1.1-flash"
+  "gemini-robotics-er-2-preview": {
+    "state": "Active",
+    "retirement": "No shutdown date announced",
+    "replacement": ""
   },
-  "gemini-robotics-er-1.6-preview": {
-    "state": "Deprecated",
-    "retirement": "August 31, 2026",
-    "replacement": "gemini-robotics-er-2-preview"
+  "gemini-robotics-er-2-streaming-preview": {
+    "state": "Active",
+    "retirement": "No shutdown date announced",
+    "replacement": ""
   }
 }
