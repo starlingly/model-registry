@@ -92,19 +92,20 @@ def release_section():
 <p>The table above tracks doors closing. This one tracks them opening: when Anthropic launched each Claude model, which weekday it chose, and how long each line waited between versions.</p>
 <p><small>{len(ms)} models across {n_all} launch dates, {first:%Y-%m-%d} through {last:%Y-%m-%d}. <strong>Launched</strong> is the public announcement date from Anthropic's own post, not the API snapshot date, which can be days earlier (Fable 5's snapshot is dated a Sunday; it launched on a Tuesday). <strong>GA</strong> = generally available; <strong>Limited</strong> = invitation or verification only. A model name links to its announcement where we have the link. The sample is small: these are observations, not predictions.</small></p>
 <p><small><strong>Where the tracker starts.</strong> It begins with the Claude 3 generation in {first:%B %Y}, when Anthropic introduced the Opus, Sonnet and Haiku names. The earlier models (Claude 1, Claude 2, Claude Instant) are not included. The first model tracked in each line: {", ".join(esc(r["model"]) + " (" + r["date"] + ")" for r in firsts)}. Those rows show "first tracked" where the others show days since the previous version.</small></p>
-<table class="weekdays"><thead><tr><th>Weekday</th><th title="Counts unique launch dates among generally available models. Two models announced together count once.">GA only<br><small>{len(ga)} models · {n_ga} dates</small></th><th title="Adds invitation-only and verification-only models (the Mythos line).">Including limited<br><small>{len(ms)} models · {n_all} dates</small></th><th>Most recent launch on this day</th></tr></thead><tbody>""")
+<p class="sort-hint"><small>Both tables sort: click a column heading, and click again to reverse.</small></p>
+<table class="weekdays sortable" data-col="0" data-dir="1"><thead><tr><th>Weekday</th><th title="Counts unique launch dates among generally available models. Two models announced together count once.">GA only<br><small>{len(ga)} models · {n_ga} dates</small></th><th title="Adds invitation-only and verification-only models (the Mythos line).">Including limited<br><small>{len(ms)} models · {n_all} dates</small></th><th>Most recent launch on this day</th></tr></thead><tbody>""")
     for d in DAYS:
         rc = recent[d]
-        out.append(f'<tr><td><strong>{d}</strong></td><td><span class="bar">{"█" * c_ga[d]}</span> {c_ga[d]}</td><td><span class="bar">{"█" * c_all[d]}</span> {c_all[d]}</td><td>{(rc["date"] + " · " + esc(" + ".join(rc["models"]))) if rc else "never"}</td></tr>')
+        out.append(f'<tr><td data-v="{DAYS.index(d)}"><strong>{d}</strong></td><td data-v="{c_ga[d]}"><span class="bar">{"█" * c_ga[d]}</span> {c_ga[d]}</td><td data-v="{c_all[d]}"><span class="bar">{"█" * c_all[d]}</span> {c_all[d]}</td><td data-v="{rc["date"] if rc else ""}">{(rc["date"] + " · " + esc(" + ".join(rc["models"]))) if rc else "never"}</td></tr>')
     out.append("</tbody></table>")
     bullets = [f'No weekend launches: 0 of {n_all} launch dates fall on a Saturday or Sunday, across {months} months.',
                f'{" and ".join(top_days)} {"is" if len(top_days) == 1 else "are"} the most common launch day{"" if len(top_days) == 1 else "s"} ({top} of {n_all} dates).',
                f'{len(bundles)} of the {n_all} dates carried more than one model. The weekday counts above count a date once, however many models shipped on it.']
     bullets += [esc(n) for n in data.get("notes", [])]
     out.append("<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>")
-    out.append("""<table class="releases"><colgroup><col style="width:9%"><col style="width:15%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:18%"><col></colgroup>
+    out.append("""<table class="releases sortable" data-col="2" data-dir="-1"><colgroup><col style="width:9%"><col style="width:15%"><col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:18%"><col></colgroup>
 <thead><tr><th>Line</th><th>Model</th><th title="Public launch date: the lab's announcement, not the API snapshot date">Launched</th><th>Day</th><th>Availability</th><th title="Days since the previous model in the same line">Days since previous<br><small>same line</small></th><th>Notes</th></tr></thead><tbody>""")
-    out.insert(len(out) - 1, '<p class="sort-hint"><small>Click a column heading to sort the table; click again to reverse. It starts newest first.</small></p>')
+
     for r in reversed(ms):
         notes = []
         if r["with"]: notes.append("Launched with " + esc(" and ".join(r["with"])) + ".")
@@ -113,31 +114,36 @@ def release_section():
         out.append(f'<tr><td>{esc(r["line"])}</td><td data-v="{esc(r["model"])}"><strong>{name(r)}</strong></td><td>{r["date"]}</td><td data-v="{DAYS.index(r["day"])}">{r["day"]}</td><td>{esc(r["availability"])}</td><td data-v="{r["gap"] if r["gap"] is not None else ""}">{gap}</td><td>{" ".join(notes)}</td></tr>')
     out.append("</tbody></table>")
     out.append("""<script>
-/* Sortable release table. No library: click a heading to sort by that column, click again to reverse.
-   A cell's data-v, when present, is its sort key (weekday order, day counts); otherwise its text.
-   Blank keys ("first tracked") always sort to the bottom. Ties keep launch order. */
+/* Sortable tables (every table.sortable in this section). No library: click a heading to sort by
+   that column, click again to reverse. A cell's data-v, when present, is its sort key (weekday
+   order, counts, dates); otherwise its text. Blank keys ("first tracked", "never") always sort to
+   the bottom. Ties keep the order the page was rendered in. data-col / data-dir on the table say
+   how it is sorted when the page loads. */
 (function () {
-  var table = document.querySelector("table.releases"); if (!table) return;
-  var body = table.tBodies[0], heads = table.tHead.rows[0].cells, state = { col: 2, dir: -1 };
-  function key(row, i) { var c = row.cells[i]; return c.hasAttribute("data-v") ? c.getAttribute("data-v") : c.textContent.trim(); }
-  function mark() { for (var i = 0; i < heads.length; i++) { heads[i].setAttribute("aria-sort", i === state.col ? (state.dir > 0 ? "ascending" : "descending") : "none"); } }
-  function sortBy(i) {
-    state.dir = (state.col === i) ? -state.dir : 1; state.col = i;
-    var rows = Array.prototype.slice.call(body.rows).map(function (r, n) { return { r: r, n: n, k: key(r, i) }; });
-    var numeric = rows.every(function (x) { return x.k === "" || !isNaN(x.k); });
-    rows.sort(function (a, b) {
-      if (a.k === "" || b.k === "") return (a.k === "" ? 1 : 0) - (b.k === "" ? 1 : 0) || a.n - b.n;
-      var c = numeric ? a.k - b.k : a.k.localeCompare(b.k, undefined, { numeric: true });
-      return c * state.dir || a.n - b.n;
-    });
-    rows.forEach(function (x) { body.appendChild(x.r); }); mark();
-  }
-  for (var i = 0; i < heads.length; i++) (function (i) {
-    heads[i].tabIndex = 0; heads[i].setAttribute("role", "columnheader");
-    heads[i].addEventListener("click", function () { sortBy(i); });
-    heads[i].addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sortBy(i); } });
-  })(i);
-  mark();
+  Array.prototype.forEach.call(document.querySelectorAll("table.sortable"), function (table) {
+    var body = table.tBodies[0], heads = table.tHead.rows[0].cells;
+    var state = { col: +table.getAttribute("data-col") || 0, dir: +table.getAttribute("data-dir") || 1 };
+    Array.prototype.forEach.call(body.rows, function (r, n) { r.setAttribute("data-n", n); });
+    function key(row, i) { var c = row.cells[i]; return c.hasAttribute("data-v") ? c.getAttribute("data-v") : c.textContent.trim(); }
+    function mark() { for (var i = 0; i < heads.length; i++) heads[i].setAttribute("aria-sort", i === state.col ? (state.dir > 0 ? "ascending" : "descending") : "none"); }
+    function sortBy(i) {
+      state.dir = (state.col === i) ? -state.dir : 1; state.col = i;
+      var rows = Array.prototype.slice.call(body.rows).map(function (r) { return { r: r, n: +r.getAttribute("data-n"), k: key(r, i) }; });
+      var numeric = rows.every(function (x) { return x.k === "" || !isNaN(x.k); });
+      rows.sort(function (a, b) {
+        if (a.k === "" || b.k === "") return (a.k === "" ? 1 : 0) - (b.k === "" ? 1 : 0) || a.n - b.n;
+        var c = numeric ? a.k - b.k : a.k.localeCompare(b.k, undefined, { numeric: true });
+        return c * state.dir || a.n - b.n;
+      });
+      rows.forEach(function (x) { body.appendChild(x.r); }); mark();
+    }
+    for (var i = 0; i < heads.length; i++) (function (i) {
+      heads[i].tabIndex = 0;
+      heads[i].addEventListener("click", function () { sortBy(i); });
+      heads[i].addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sortBy(i); } });
+    })(i);
+    mark();
+  });
 })();
 </script>""")
     return "\n".join(out)
@@ -316,8 +322,8 @@ main.container .registry td.door { font-size: 12px; }
 main.container .registry td.note { font-size: 12px; }
 main.container table:not(.registry) td, main.container table:not(.registry) th { font-size: 12px; }
 main.container strong a { font-weight: 600; }
-main.container table.releases th { cursor: pointer; user-select: none; } main.container table.releases th:hover { text-decoration: underline; }
-main.container table.releases th::after { content: " ↕"; font-weight: 400; opacity: .35; } main.container table.releases th[aria-sort="ascending"]::after { content: " ▲"; opacity: 1; } main.container table.releases th[aria-sort="descending"]::after { content: " ▼"; opacity: 1; }
+main.container table.sortable th { cursor: pointer; user-select: none; } main.container table.sortable th:hover { text-decoration: underline; }
+main.container table.sortable th::after { content: " ↕"; font-weight: 400; opacity: .35; } main.container table.sortable th[aria-sort="ascending"]::after { content: " ▲"; opacity: 1; } main.container table.sortable th[aria-sort="descending"]::after { content: " ▼"; opacity: 1; }
 main.container .sort-hint { margin: .2rem 0 .3rem; }
 main.container table.releases { table-layout: fixed; } main.container table.weekdays { width: auto; min-width: 60%; margin-bottom: .6rem; } main.container .bar { letter-spacing: -1px; color: var(--accent); }
 main.container table.terms { table-layout: fixed; } main.container table.terms th:first-child, main.container table.terms td:first-child { width: 11%; } main.container table.terms th:last-child, main.container table.terms td:last-child { width: 20%; }
